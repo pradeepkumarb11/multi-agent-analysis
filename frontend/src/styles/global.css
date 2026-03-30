@@ -1,0 +1,267 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600&family=JetBrains+Mono&display=swap');
+
+/* ==========================================================================
+   Multi-Agent LLM Data Analysis System — Global Design System
+   Strictly adheres to 8px grid, specific typography scale, and color palette.
+   ========================================================================== */
+
+:root {
+  /* Color Palette */
+  --bg-main: #0F0F0F;
+  --surface: #1A1A1A;
+  --surface-2: #222222;
+  --border-color: #2A2A2A;
+  
+  --accent: #6366F1;
+  --accent-hover: #4F46E5;
+  --accent-muted: #6366F120;
+  
+  --text-primary: #F5F5F5;
+  --text-muted: #888888;
+  --text-subtle: #555555;
+  
+  --success: #22C55E;
+  --warning: #F59E0B;
+  --error: #EF4444;
+
+  /* Spacing (8px grid) */
+  --space-4: 4px;
+  --space-8: 8px;
+  --space-12: 12px;
+  --space-16: 16px;
+  --space-24: 24px;
+  --space-32: 32px;
+  --space-48: 48px;
+  --space-64: 64px;
+
+  /* Border Radius */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-pill: 9999px;
+}
+
+/* ==========================================================================
+   Reset & Base
+   ========================================================================== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--bg-main);
+  color: var(--text-primary);
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+  transition: color 150ms ease;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* ==========================================================================
+   Typography Scale
+   ========================================================================== */
+.text-caption {
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.text-body {
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.text-input {
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.text-heading {
+  font-size: 20px;
+  line-height: 1.3;
+  font-weight: 600;
+}
+
+.text-hero {
+  font-family: 'DM Serif Display', serif;
+  font-size: 32px;
+  line-height: 1.1;
+  font-weight: 400;
+}
+
+.font-mono {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* Text Colors */
+.color-primary { color: var(--text-primary); }
+.color-muted { color: var(--text-muted); }
+.color-subtle { color: var(--text-subtle); }
+.color-success { color: var(--success); }
+.color-error { color: var(--error); }
+
+/* ==========================================================================
+   Layout & Utilities
+   ========================================================================== */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--space-32);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-32);
+}
+
+@media (min-width: 768px) {
+  .layout-grid {
+    display: grid;
+    grid-template-columns: 40% 1fr;
+    gap: var(--space-32);
+    align-items: start;
+  }
+}
+
+@media (max-width: 767px) {
+  .layout-grid {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-24);
+  }
+}
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-row {
+  display: flex;
+  align-items: center;
+}
+
+.gap-4 { gap: var(--space-4); }
+.gap-8 { gap: var(--space-8); }
+.gap-12 { gap: var(--space-12); }
+.gap-16 { gap: var(--space-16); }
+.gap-24 { gap: var(--space-24); }
+
+/* ==========================================================================
+   Components Base Styles
+   ========================================================================== */
+.card {
+  background-color: var(--surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: var(--space-16);
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  outline: none;
+  font-family: 'Inter', sans-serif;
+  transition: transform 150ms ease, background-color 150ms ease;
+}
+
+button:active {
+  transform: scale(0.97);
+}
+
+/* ==========================================================================
+   Animations
+   ========================================================================== */
+
+/* Shimmer skeleton effect */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--surface-2) 25%,
+    #2c2c2c 50%,
+    var(--surface-2) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s linear infinite;
+  border-radius: var(--radius-sm);
+}
+
+/* Agent Trace Pulse */
+@keyframes pulse-ring {
+  0% { box-shadow: 0 0 0 0 var(--accent-muted); }
+  70% { box-shadow: 0 0 0 6px transparent; }
+  100% { box-shadow: 0 0 0 0 transparent; }
+}
+
+.dot-active {
+  animation: pulse-ring 1.5s cubic-bezier(0.24, 0, 0.38, 1) infinite;
+}
+
+/* Slide in animation for agent trace */
+@keyframes slide-in-bottom {
+  0% {
+    transform: translateY(8px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.animate-slide-in {
+  animation: slide-in-bottom 200ms ease forwards;
+}
+
+/* Markdown prose rendering styles for Report */
+.prose {
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--text-primary);
+}
+
+.prose p { margin-bottom: var(--space-12); }
+.prose strong { font-weight: 600; }
+.prose h1, .prose h2, .prose h3 {
+  font-weight: 600;
+  margin-top: var(--space-16);
+  margin-bottom: var(--space-8);
+}
+.prose h3 { font-size: 15px; }
+.prose code {
+  font-family: 'JetBrains Mono', monospace;
+  background-color: var(--surface-2);
+  padding: 2px 4px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+}
+.prose pre {
+  background-color: var(--surface-2);
+  padding: var(--space-12);
+  border-radius: var(--radius-md);
+  overflow-x: auto;
+  margin-bottom: var(--space-12);
+}
+.prose pre code {
+  background-color: transparent;
+  padding: 0;
+}
+.prose ul, .prose ol {
+  margin-left: var(--space-16);
+  margin-bottom: var(--space-12);
+}
+.prose li { margin-bottom: var(--space-4); }

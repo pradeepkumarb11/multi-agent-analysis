@@ -5,6 +5,8 @@ services:
     buildCommand: pip install -r backend/requirements.txt
     startCommand: bash start.sh
     envVars:
+      - key: PYTHON_VERSION
+        value: "3.11.0"
       - key: GROQ_API_KEY
         sync: false
       - key: SUPABASE_URL

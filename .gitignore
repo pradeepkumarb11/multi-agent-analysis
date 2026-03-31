@@ -1,0 +1,19 @@
+node_modules/
+dist/
+dist-ssr/
+.vite/
+.env*
+!.env.example
+*.local
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.venv/
+env/
+.env
+
+# MacOS
+.DS_Store

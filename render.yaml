@@ -3,7 +3,7 @@ services:
     name: multi-agent-api
     runtime: python
     buildCommand: pip install -r backend/requirements.txt
-    startCommand: uvicorn backend.main:app --host 0.0.0.0 --port 8000
+    startCommand: bash start.sh
     envVars:
       - key: GROQ_API_KEY
         sync: false
@@ -17,18 +17,3 @@ services:
         sync: false
       - key: LANGCHAIN_TRACING_V2
         value: "true"
-
-  - type: worker
-    name: multi-agent-worker
-    runtime: python
-    buildCommand: pip install -r backend/requirements.txt
-    startCommand: arq backend.worker.WorkerSettings
-    envVars:
-      - key: GROQ_API_KEY
-        sync: false
-      - key: SUPABASE_URL
-        sync: false
-      - key: SUPABASE_KEY
-        sync: false
-      - key: UPSTASH_REDIS_URL
-        sync: false
